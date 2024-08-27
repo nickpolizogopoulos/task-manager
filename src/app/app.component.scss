@@ -14,7 +14,8 @@ main {
   display: flex;
   gap: 0.5rem;
   overflow: auto;
-  width: 220px;
+  min-width: 220px;
+  width: 100%;
 }
 
 
