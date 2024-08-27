@@ -1,0 +1,62 @@
+
+$font-color: #c3b3d8;
+$background: #9965dd;
+
+hr {
+    color: $font-color;
+    border: none;
+    height: 0.5px;
+    background-color: $font-color;
+}
+
+.tasks {
+    padding: 1rem;
+    border-radius: 8px;
+    max-height: 60vh;
+    overflow: auto;
+    background-color: #3a2c54;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+  
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+  
+menu button {
+    font: inherit;
+    cursor: pointer;
+    background-color: $background;
+    border-radius: 6px;
+    padding: 0.35rem 0.8rem;
+    font-size: 0.9rem;
+    border: 2px solid $background;
+    &:hover, &:active {
+        color: $font-color;
+        background-color: transparent;
+    }
+}
+  
+ul {
+    list-style: none;
+    margin: 1rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 50vh;
+    overflow: auto;
+}
+  
+@media (min-width: 768px) {
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    menu {
+        width: auto;
+    }
+}

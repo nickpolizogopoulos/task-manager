@@ -4,7 +4,7 @@
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.443);
     &:hover {
-        border: 1px solid transparent;
+        border: 1px solid #9965dd;
     }
 }
 
@@ -21,9 +21,6 @@
     width: 100%;
     min-width: 10rem;
     text-align: left;
-    &:hover {
-        box-shadow: 0 0 9px rgba(0, 0, 0, 0.4) inset;
-    }
 }
 
 .user:hover,

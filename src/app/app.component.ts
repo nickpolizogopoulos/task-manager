@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
+import { TasksComponent } from './tasks/tasks.component';
 import { User, dummy_users } from './utilities/users';
 
 @Component({
@@ -11,7 +13,8 @@ import { User, dummy_users } from './utilities/users';
   [
     // RouterOutlet
     HeaderComponent,
-    UserComponent
+    UserComponent,
+    TasksComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -19,8 +22,10 @@ import { User, dummy_users } from './utilities/users';
 export class AppComponent {
   
   users:User[] = dummy_users;
-  
+
+  selectedUser!:User;
+
   onSelectUser( id:string ) {
-    console.log(`user with id "${id}" selected`);
+    this.selectedUser = this.users.find( user => user.id === id )!;
   }
 }

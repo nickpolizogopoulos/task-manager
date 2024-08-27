@@ -1,5 +1,7 @@
 import { Component, computed, EventEmitter, input, output, Input, Output } from '@angular/core';
 
+import { User } from '../utilities/users';
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -8,27 +10,21 @@ import { Component, computed, EventEmitter, input, output, Input, Output } from 
   styleUrl: './user.component.scss'
 })
 export class UserComponent {
-  
-  @Input({required: true}) name!:string;
-  @Input({required: true}) id!:string;
-  @Input({required: true}) avatar!:string;
 
-  //* old output mechanism
-  // @Output() select = new EventEmitter<string>();
+  @Input({required: true}) user!:User;
 
-  //* new output syntax
   select = output<string>();
 
   get imagePath():string {
-    return 'users/' + this.avatar;
+    return 'users/' + this.user.avatar;
   }
 
   get imageAlt():string {
-    return this.name + ' avatar';
+    return this.user.name + ' avatar';
   }
 
   onSelectUser() {
-    this.select.emit(this.id);
+    this.select.emit(this.user.id);
   }
 
   //* Signal inputs
