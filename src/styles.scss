@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background: radial-gradient(circle at top left, #181023, #0b0519);
+    color: #c3b3d8;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: 400;
+}
+
+p {
+    text-wrap: wrap;
+}
