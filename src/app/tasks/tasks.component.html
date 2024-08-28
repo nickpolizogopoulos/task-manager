@@ -7,14 +7,13 @@
     </header>
     <hr>
     <ul>
-        <li>
-            <app-task />
-        </li>
-        <li>
-            <app-task />
-        </li>
-        <li>
-            <app-task />
-        </li>
-    </ul>
+        @for (task of selectedUserTasks; track task.id) {
+            <li>
+                <app-task [task]="task" />
+            </li>
+        }
+        @empty {
+            <p class="empty">{{ user.name }} has no tasks.</p>
+        }
+        </ul>
 </section>

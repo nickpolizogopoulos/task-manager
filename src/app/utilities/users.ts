@@ -5,7 +5,8 @@ export interface User {
   avatar: string;
 }
 
-export const dummy_users:User[] = [
+export const dummy_users:User[] = 
+[
     {
       id: 'u1',
       name: 'Jasmine Washington',
@@ -37,3 +38,4 @@ export const dummy_users:User[] = [
       avatar: 'user-6.jpg',
     },
   ];
+  

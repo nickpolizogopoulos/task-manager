@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { type Task } from '../../utilities/tasks';
+import { required } from '../../utilities/general';
 
 @Component({
   selector: 'app-task',
@@ -9,4 +11,6 @@ import { Component } from '@angular/core';
 })
 export class TaskComponent {
 
+  @Input(required) task!:Task;
+  
 }

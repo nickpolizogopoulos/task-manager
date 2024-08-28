@@ -1,5 +1,5 @@
 <section class="user-box">
-    <div class="user" (click)="onSelectUser()">
+    <div [class.active]="isSelected" class="user" (click)="onSelectUser()">
         <img [src]="imagePath" [alt]="imageAlt">
         <span>{{ user.name }}</span>
     </div>

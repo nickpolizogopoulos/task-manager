@@ -1,6 +1,7 @@
-import { Component, computed, EventEmitter, input, output, Input, Output } from '@angular/core';
+import { Component, Input, computed, EventEmitter, input, output, Output } from '@angular/core';
 
-import { User } from '../utilities/users';
+import { type User } from '../utilities/users';
+import { required } from '../utilities/general';
 
 @Component({
   selector: 'app-user',
@@ -11,7 +12,8 @@ import { User } from '../utilities/users';
 })
 export class UserComponent {
 
-  @Input({required: true}) user!:User;
+  @Input(required) user!:User;
+  @Input(required) isSelected!:boolean;
 
   select = output<string>();
 

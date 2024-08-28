@@ -1,7 +1,9 @@
 import { Component, input, Input } from '@angular/core';
 
-import { User } from '../utilities/users';
+import { type User } from '../utilities/users';
 import { TaskComponent } from "./task/task.component";
+import { required } from '../utilities/general';
+import { dummy_tasks, type Task } from '../utilities/tasks';
 
 @Component({
   selector: 'app-tasks',
@@ -12,8 +14,12 @@ import { TaskComponent } from "./task/task.component";
 })
 export class TasksComponent {
 
-  @Input({required: true}) user!:User;
+  @Input(required) user!:User;
 
-  // user = input.required<User>();
+  get selectedUserTasks() {
+    return this.tasks.filter( task => task.userId === this.user.id );
+  }
+
+  tasks:Task[] = dummy_tasks;
 
 }
