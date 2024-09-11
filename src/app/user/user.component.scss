@@ -21,6 +21,7 @@
     width: 100%;
     min-width: 10rem;
     text-align: left;
+    transition: all .1s ease-in-out;
     &:hover, 
     &:active, 
     &.active {

@@ -4,7 +4,11 @@ main {
   margin: 1.6rem auto;
   display: grid;
   grid-auto-flow: row;
-  gap: 2rem;
+  gap: 3rem;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
 }
 
 #users {

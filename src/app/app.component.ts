@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { type User, dummy_users } from './utilities/users';
-import { Title } from '@angular/platform-browser';
 import { FooterComponent } from "./footer/footer.component";
 
 @Component({
@@ -21,9 +21,7 @@ import { FooterComponent } from "./footer/footer.component";
 })
 export class AppComponent implements OnInit {
 
-  constructor(
-    private title:Title
-  ) {}
+  private title = inject(Title);
 
   ngOnInit():void {
     this.title.setTitle('Easy Task Manager');
