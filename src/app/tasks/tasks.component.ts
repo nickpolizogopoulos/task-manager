@@ -2,7 +2,7 @@ import { Component, HostListener, inject, input, Input, OnInit, output } from '@
 
 import { type User } from '../utilities/users';
 import { TaskComponent } from "./task/task.component";
-import { NewTaskData, type Task } from '../utilities/tasks';
+import { type Task } from '../utilities/tasks';
 import { NewTaskComponent } from "./new-task/new-task.component";
 import { TasksService } from './tasks.service';
 import { required } from '../utilities/general';

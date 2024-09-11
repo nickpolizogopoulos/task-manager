@@ -14,19 +14,20 @@ $background: #9965dd;
         max-height: 450px;
     }
 
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        gap: 1rem;
+        padding: 0;
+    }
+    
 }
 
 .empty {
     font-size: 14px;
     font-style: italic;
-}
-  
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-    gap: 1rem;
 }
   
 button {
@@ -54,8 +55,7 @@ button {
   
 ul {
     list-style: none;
-    margin: 1rem 0;
-    padding: 0;
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
