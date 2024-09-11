@@ -1,8 +1,12 @@
+@if (isAddingTask) {
+    <app-new-task (close)="onCloseAddTask()" [user]="user" />
+}
 <section class="tasks">
     <header>
         <h2>{{ user.name }}'s Tasks</h2>
         <menu>
-            <button>Add Task</button>
+            <button class="close" (click)="onClose()">Close</button>
+            <button (click)="onAddNewTask()">Add Task</button>
         </menu>
     </header>
     <hr>
@@ -13,7 +17,7 @@
             </li>
         }
         @empty {
-            <p class="empty">{{ user.name }} has no tasks.</p>
+            <p class="empty">{{user.name}}'s list is empty.</p>
         }
-        </ul>
+    </ul>
 </section>

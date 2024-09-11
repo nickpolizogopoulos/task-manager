@@ -1,7 +1,7 @@
 main {
   width: 90%;
   max-width: 50rem;
-  margin: 2.5rem auto;
+  margin: 1.6rem auto;
   display: grid;
   grid-auto-flow: row;
   gap: 2rem;
@@ -16,6 +16,10 @@ main {
   overflow: auto;
   min-width: 220px;
   width: 100%;
+
+  // @media screen and (max-width) {
+    
+  // }
 }
 
 

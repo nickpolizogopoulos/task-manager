@@ -14,11 +14,12 @@ time {
     font-size: 14px;
     font-style: italic;
     text-decoration: underline;
-    text-decoration-thickness: 1.5px;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
 }
 
 .summary {
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
 
 .actions {

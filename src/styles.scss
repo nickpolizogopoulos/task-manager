@@ -17,14 +17,13 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
+
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-    font-weight: 400;
+@for $i from 1 through 6 {
+    h#{$i} {
+        font-weight: 400;
+    }
 }
 
 button {
@@ -33,4 +32,11 @@ button {
 
 p {
     text-wrap: wrap;
+}
+
+hr {
+    color: #c3b3d8;
+    border: none;
+    height: 0.5px;
+    background-color: #c3b3d8;
 }

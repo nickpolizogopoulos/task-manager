@@ -8,9 +8,10 @@
         }
     </ul>
     @if (selectedUser) {
-        <app-tasks [user]="selectedUser" />
+        <app-tasks (closeTasks)="onCloseTasks()" [user]="selectedUser" />
     }
     @else {
         <h2>Select a user to view and edit their tasks.</h2>
     }
 </main>
+<app-footer />

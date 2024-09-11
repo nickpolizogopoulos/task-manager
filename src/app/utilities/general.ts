@@ -1,6 +1,5 @@
 
 
 export const required = {
-    required:true
+    required: true
 };
-

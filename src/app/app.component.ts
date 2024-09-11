@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { type User, dummy_users } from './utilities/users';
 import { Title } from '@angular/platform-browser';
+import { FooterComponent } from "./footer/footer.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports:
-  [
-    // RouterOutlet
+  imports: [
     HeaderComponent,
     UserComponent,
-    TasksComponent
-  ],
+    TasksComponent,
+    FooterComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -33,6 +32,10 @@ export class AppComponent implements OnInit {
   users:User[] = dummy_users;
   
   selectedUser?:User;
+
+  onCloseTasks():void {
+    this.selectedUser = undefined;
+  }
   
   onSelectUser( id:string ) {
     this.selectedUser = this.users.find( user => user.id === id )!;

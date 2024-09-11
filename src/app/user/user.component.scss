@@ -2,7 +2,7 @@
     border-radius: 6px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.443);
+    border: 1px solid #6a5f76;
     &:hover {
         border: 1px solid #9965dd;
     }
@@ -26,6 +26,11 @@
     &.active {
         background-color: #9965dd;
         color: #150722;
+    }
+    user-select: none;
+    
+    @media screen and (max-width: 767px) {
+        min-height: 50px;
     }
 }
 
