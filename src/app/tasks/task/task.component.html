@@ -1,8 +1,0 @@
-<article>
-    <h3>{{ task.title }}</h3>
-    <time>{{ task.dueDate | date: 'dd MMM yyy' }}</time>
-    <p class="summary">{{ task.summary }}</p>
-    <div class="actions">
-        <button (click)="onComplete()">Complete</button>
-    </div>
-</article>

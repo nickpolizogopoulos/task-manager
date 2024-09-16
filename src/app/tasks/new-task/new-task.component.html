@@ -1,25 +1,18 @@
 <div class="backdrop"></div>
 <dialog open>
-    <h2>New task for {{ user.name }}</h2>
+    <h2>New task for {{ user().name }}</h2>
     <hr>
     <form (ngSubmit)="onSubmit()">
-        <div>
-            <label for="title">Title</label>
-            <input [(ngModel)]="title" type="text" id="title" name="title" />
-        </div>
+        <label for="title">Title</label>
+        <input [(ngModel)]="title" type="text" id="title" name="title" />
 
-        <div>
-            <label for="summary">Summary</label>
-            <textarea [(ngModel)]="summary" id="summary" rows="5" name="summary"></textarea>
-        </div>
+        <label for="summary">Summary</label>
+        <textarea [(ngModel)]="summary" id="summary" rows="5" name="summary"></textarea>
 
-        <div>
-            <label for="due-date">Due Date</label>
-            <input [(ngModel)]="date" type="date" id="due-date" name="due-date" />
-        </div>
-
-        @if (formErrorMessage) {
-            <div class="form-error-message-box">{{ formErrorMessage }}</div>
+        <label for="due-date">Due Date</label>
+        <input [(ngModel)]="date" type="date" id="due-date" name="due-date" />
+        @if (formErrorMessage()) {
+            <div class="form-error-message-box">{{ formErrorMessage() }}</div>
         }
         <div class="actions">
             <button (click)="onClose()" type="button">Cancel</button>

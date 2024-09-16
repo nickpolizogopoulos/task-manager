@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { dummy_tasks, type NewTaskData, type Task } from '../utilities/tasks';
 
 @Injectable({
@@ -9,46 +9,40 @@ export class TasksService {
   constructor() {
     const tasks = localStorage.getItem('tasks');
 
-    if (tasks) {
-      this.tasks = JSON.parse(tasks);
-    }
+    if (tasks)
+      this.tasks.set(JSON.parse(tasks));
   }
 
+  private tasks = signal<Task[]>(dummy_tasks);
+
   private saveTasks() {
-    const tasks = JSON.stringify(this.tasks);
+    const tasks = JSON.stringify(this.tasks());
 
     localStorage.setItem('tasks', tasks);
   }
 
-  getUserTasks( userId:string ):Task[] {
-    return this.tasks.filter( task => task.userId === userId );
+  getUserTasks( userId:string ): Task[] {
+    return this.tasks().filter( task => task.userId === userId );
   }
 
-  addTask( task:NewTaskData, userId:string  ) {
-    this.tasks.unshift(
+  addTask( task:NewTaskData, userId:string ) {
+    this.tasks.update( tasks => [
       {
-        id: new Date().getTime().toString(), //* not so good way for generating random IDs but works for now.
+        //* not the best way to generate random IDs but works for now.
+        id: new Date().getTime().toString(),
         userId: userId,
         title: task.title,
         summary: task.summary,
         dueDate: task.date
-      }
-    );
+      },
+      ...tasks
+    ]);
     this.saveTasks();
   }
 
   removeTask( id:string ) {
-    const task = this.tasks.find( task => task.id === id )!;
-    const index = this.tasks.indexOf(task);
-
-    this.tasks.splice(index, 1);
-
-    //* Max does it like this:
-    //* this will create a new array with the method parameter excluded.
-    //* this.tasks.filter( task => task.id !== id );
-
+    this.tasks.update( tasks => tasks.filter(task => task.id !== id) );
     this.saveTasks();
   }
-
-  private tasks:Task[] = dummy_tasks;
+  
 }

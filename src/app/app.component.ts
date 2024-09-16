@@ -27,15 +27,17 @@ export class AppComponent implements OnInit {
     this.title.setTitle('Easy Task Manager');
   }
   
-  users:User[] = dummy_users;
-  
-  selectedUser?:User;
+  users = signal<User[]>(dummy_users);
+  selectedUser = signal<User | undefined>(undefined);
 
   onCloseTasks():void {
-    this.selectedUser = undefined;
+    this.selectedUser.update( () => undefined );
   }
   
   onSelectUser( id:string ) {
-    this.selectedUser = this.users.find( user => user.id === id )!;
+
+    this.selectedUser.update( () => 
+      this.users().find( user => user.id === id )
+    )
   }
 }

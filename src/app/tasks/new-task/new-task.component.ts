@@ -1,10 +1,8 @@
-import { Component, inject, Input, output } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { type NewTaskData } from '../../utilities/tasks';
 import { TasksService } from '../tasks.service';
 import { User } from '../../utilities/users';
-import { required } from '../../utilities/general';
 
 @Component({
   selector: 'app-new-task',
@@ -17,48 +15,45 @@ import { required } from '../../utilities/general';
 })
 export class NewTaskComponent {
 
-  @Input(required) user!:User;
-
   private tasksService = inject(TasksService);
 
+  user = input.required<User>();
   close = output<void>();
 
-  title:string = '';
-  summary:string = '';
-  date:string = '';
+  title = signal<string>('');
+  summary = signal<string>('');
+  date = signal<string>('');
 
-  formErrorMessage:null | string = null;
+  formErrorMessage = signal<string | null>(null);
 
   onSubmit() {
 
-    //* Form Validation apo LIDL only 9.99 kalhmera.
-    const title = this.title.trim() === '';
-    const summary = this.summary.trim() === '';
-    const date = this.date === '';
-    if (title || summary || date ) {
-      this.formErrorMessage = 'Please, fill all the required fields!';
-      return
-    }
-    //* Form Validation apo LIDL only 9.99 kalhnyxta.
-
+    const title = this.title().trim() === '';
+    const summary = this.summary().trim() === '';
+    const date = this.date() === '';
     
-    this.formErrorMessage = null;
-
+    if (title || summary || date ) {
+      this.formErrorMessage.update( () => 'Please, fill all the required fields!' );
+      return;
+    }
+    
+    this.formErrorMessage.set(null);
+    
     this.tasksService.addTask(
       {
-        title: this.title,
-        summary: this.summary,
-        date: this.date
+        title: this.title(),
+        summary: this.summary(),
+        date: this.date()
       },
-      this.user.id
+      this.user().id
     );
-
+    
     this.onClose();
   }
-
+  
   onClose():void {
     this.close.emit();
-    this.formErrorMessage = null;
+    this.formErrorMessage.set(null);
   }
 
 }

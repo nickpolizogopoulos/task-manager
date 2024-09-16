@@ -26,8 +26,7 @@ dialog {
     }
 }
 
-hr, 
-form div {
+hr {
     margin-bottom: 10px;
 }
 
@@ -54,6 +53,8 @@ label {
 
 input,
 textarea {
+    margin-bottom: 10px;
+
     width: 100%;
     font: inherit;
     padding: 0.15rem 0.6rem;
