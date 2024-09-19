@@ -14,29 +14,29 @@ import { TasksService } from './tasks.service';
   ],
   template: `
   
-  @if (isAddingTask()) {
-    <app-new-task (close)="onCloseAddTask()" [user]="user()" />
-  }
-  <section class="tasks">
-      <header>
-          <h2>{{ user().name }}'s Tasks</h2>
-          <menu>
-              <button class="close" (click)="onClose()">Close</button>
-              <button (click)="onAddNewTask()">Add Task</button>
-          </menu>
-      </header>
-      <hr>
-      <ul>
-          @for (task of selectedUserTasks; track task.id) {
-              <li>
-                  <app-task [task]="task" />
-              </li>
-          }
-          @empty {
-              <p class="empty">{{user().name}}'s list is empty.</p>
-          }
-      </ul>
-  </section>
+    @if (isAddingTask()) {
+      <app-new-task (close)="onCloseAddTask()" [user]="user()" />
+    }
+    <section class="tasks">
+        <header>
+            <h2>{{ user().name }}'s Tasks</h2>
+            <menu>
+                <button class="close" (click)="onClose()">Close</button>
+                <button (click)="onAddNewTask()">Add Task</button>
+            </menu>
+        </header>
+        <hr>
+        <ul>
+            @for (task of selectedUserTasks; track task.id) {
+                <li>
+                    <app-task [task]="task" />
+                </li>
+            }
+            @empty {
+                <p class="empty">{{user().name}}'s list is empty.</p>
+            }
+        </ul>
+    </section>
   
   `,
   styleUrl: './tasks.component.scss'

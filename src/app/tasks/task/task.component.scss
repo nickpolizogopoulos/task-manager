@@ -1,16 +1,15 @@
+@use '../../../app/utilities/colour-palette' as *;
 
-$background: #380774;
-$text: #25113d;
 
 article {
     padding: 1rem;
-    color: $text;
-    background-color: #bf9ee5;
+    color: $silver;
+    background-color: $light-blue;
     border-radius: 7px;
 }
 
 time {
-    color: #67537f;
+    color: $grey;
     font-size: 14px;
     font-style: italic;
     text-decoration: underline;
@@ -28,16 +27,18 @@ time {
         font: inherit;
         font-size: 0.8rem;
         cursor: pointer;
-        background-color: $background;
-        color: #decdf2;
+        background-color: $deep-blue;
+        color: $silver;
         border-radius: 4px;
         padding: 0.3rem 1rem;
         border: none;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-        border: 2px solid $background;
+        // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 0px 11px rgba(255, 255, 255, 0.4);
+        border: 2px solid $deep-blue;
         &:hover, &:active {
             background-color: transparent;
-            color: $text;
+            border: 2px solid $grey;
+            color: $silver;
             box-shadow: none;
         }
     }

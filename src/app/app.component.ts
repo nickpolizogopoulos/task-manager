@@ -1,11 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-import { HeaderComponent } from './header/header.component';
+import { type User, dummy_users } from './utilities/users';
 import { UserComponent } from './user/user.component';
 import { TasksComponent } from './tasks/tasks.component';
-import { type User, dummy_users } from './utilities/users';
-import { FooterComponent } from "./footer/footer.component";
+import { HeaderComponent } from './common-components/header.component';
+import { FooterComponent } from "./common-components/footer.component";
 
 @Component({
   selector: 'app-root',

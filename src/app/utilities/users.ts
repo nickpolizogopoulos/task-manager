@@ -57,6 +57,11 @@ export const dummy_users:User[] =
       avatar: 'margo.jpg',
     },
     {
+      id: 'u4',
+      name: 'Josh Hoberman',
+      avatar: 'josh.jpg',
+    },
+    {
       id: 'u5',
       name: 'Julia Wicker',
       avatar: 'julia.jpg',
@@ -65,11 +70,7 @@ export const dummy_users:User[] =
       id: 'u6',
       name: 'Fen',
       avatar: 'fen.jpg',
-    },
-    {
-      id: 'u4',
-      name: 'Josh Hoberman',
-      avatar: 'josh.jpg',
     }
+
 ];
   

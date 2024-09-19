@@ -1,11 +1,16 @@
+@use '../utilities/colour-palette' as *;
+
+* {
+    transition: all .3s ease-in-out;
+}
 
 .user-box {
     border-radius: 6px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    border: 1px solid #6a5f76;
+    border: 1px solid $blue-grey;
     &:hover {
-        border: 1px solid #9965dd;
+        border: 1px solid $grey;
     }
 }
 
@@ -13,9 +18,9 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.35rem 0.5rem;
-    background-color: #433352;
-    color: #c3b3d1;
+    padding: 0.5rem 0.5rem;
+    background-color: $light-blue;
+    color: $silver;
     border: none;
     font: inherit;
     cursor: pointer;
@@ -26,8 +31,7 @@
     &:hover, 
     &:active, 
     &.active {
-        background-color: #9965dd;
-        color: #150722;
+        background-color: $deep-blue;
     }
     user-select: none;
     
@@ -40,7 +44,7 @@ img {
     width: 2rem;
     object-fit: contain;
     border-radius: 50%;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
 }
 
 span {

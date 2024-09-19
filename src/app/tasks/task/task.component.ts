@@ -1,4 +1,4 @@
-import { Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 import { type Task } from '../../utilities/tasks';
@@ -28,10 +28,10 @@ export class TaskComponent {
 
   private tasksService = inject(TasksService);
 
-  task = input.required<Task>()
+  task = input.required<Task>();
 
   onComplete():void {
-    this.tasksService.removeTask(this.task().id)
+    this.tasksService.removeTask( this.task().id );
   }
   
 }
