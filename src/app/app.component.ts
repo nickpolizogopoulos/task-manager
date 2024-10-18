@@ -1,43 +1,36 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
-import { type User, dummy_users } from './utilities/users';
-import { UserComponent } from './user/user.component';
-import { TasksComponent } from './tasks/tasks.component';
 import { HeaderComponent } from './common-components/header.component';
 import { FooterComponent } from "./common-components/footer.component";
+import { UsersComponent } from './users/users.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    RouterOutlet,
     HeaderComponent,
-    UserComponent,
-    TasksComponent,
+    UsersComponent,
     FooterComponent
-],
-  templateUrl: './app.component.html',
+  ],
+  template: `
+  
+    <header appHeader></header>
+    <main>
+
+      <aside>
+        <app-users />
+      </aside>
+        
+      <section>
+        <router-outlet />
+      </section>
+
+    </main>
+    <footer appFooter></footer>
+  
+  `,
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
-
-  private title = inject(Title);
-
-  ngOnInit():void {
-    this.title.setTitle('Easy Task Manager');
-  }
-  
-  users = signal<User[]>(dummy_users);
-  selectedUser = signal<User | undefined>(undefined);
-
-  onCloseTasks():void {
-    this.selectedUser.update( () => undefined );
-  }
-  
-  onSelectUser( id:string ) {
-
-    this.selectedUser.update( () => 
-      this.users().find( user => user.id === id )
-    )
-  }
-}
+export class AppComponent {}

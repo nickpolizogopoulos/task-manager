@@ -1,0 +1,70 @@
+@use '../utilities/colour-palette' as *;
+
+.user-box {
+    transition: all .2s ease-in-out;
+    border-radius: 7px;
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid $blue-grey;
+
+    a {
+        text-decoration: none;
+    }   
+
+    &:hover {
+        border: 1px solid $grey;
+    }
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.5rem;
+    background-color: $light-blue;
+    color: $silver;
+    font: inherit;
+    cursor: pointer;
+    width: 100%;
+    min-width: 10rem;
+    text-align: left;
+    transition: all .1s ease-in-out;
+    user-select: none;
+
+    &:hover, 
+    &:active, 
+    &.active {
+        background-color: $deep-blue;
+    }
+
+    img {
+        width: 2rem;
+        object-fit: contain;
+        border-radius: 50%;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    }
+
+    span {
+        font-size: 0.8rem;
+        font-weight: normal;
+    }
+}
+
+ul {
+    display: flex;
+    gap: 0.5rem;
+    min-width: 220px;
+    width: 100%;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 890px) {
+    .user {
+        min-height: 55px;
+    }
+
+    ul {
+        flex-direction: row;
+        overflow: scroll;
+    }
+}

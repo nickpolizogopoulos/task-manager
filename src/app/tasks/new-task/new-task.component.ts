@@ -48,10 +48,10 @@ export class NewTaskComponent {
       this.user().id
     );
     
-    this.onClose();
+    this.onCloseAddTaskPanel();
   }
   
-  onClose():void {
+  onCloseAddTaskPanel():void {
     this.close.emit();
     this.formErrorMessage.set(null);
   }

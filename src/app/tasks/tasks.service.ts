@@ -21,11 +21,11 @@ export class TasksService {
     localStorage.setItem('tasks', tasks);
   }
 
-  getUserTasks( userId:string ): Task[] {
+  getUserTasks( userId: string ): Task[] {
     return this.tasks().filter( task => task.userId === userId );
   }
 
-  addTask( task:NewTaskData, userId:string ) {
+  addTask( task: NewTaskData, userId: string ): void {
     this.tasks.update( tasks => [
       {
         //* not the best way to generate random IDs but works for now.

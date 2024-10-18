@@ -1,3 +1,32 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+import { HomeComponent } from './home.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { NewTaskComponent } from './tasks/new-task/new-task.component';
+
+export const routes: Routes = 
+[
+    {
+        path: '',
+        component: HomeComponent
+    },
+    {
+        path: 'users/:userId',
+        component: TasksComponent,
+        children: [
+            {
+                path: 'new-task',
+                component: NewTaskComponent
+            }
+        ]
+    },
+    
+
+
+
+
+    {
+        path: '**',
+        redirectTo: ''
+    }
+];
