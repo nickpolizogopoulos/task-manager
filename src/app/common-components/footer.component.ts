@@ -24,10 +24,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 
     .footer {
         margin: 0 auto;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        // position: fixed;
+        // bottom: 0;
+        // left: 0;
+        // right: 0;
         width: 90%;
         max-width: 50rem;
         text-align: center;

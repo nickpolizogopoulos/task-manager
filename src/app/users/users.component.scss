@@ -6,15 +6,17 @@
     box-shadow: 0 1px 7px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     border: 1px solid $blue-grey;
-
+    
     a {
         text-decoration: none;
     }   
-
+    
     &:hover {
         border: 1px solid $grey;
     }
 }
+
+
 
 .user {
     display: flex;

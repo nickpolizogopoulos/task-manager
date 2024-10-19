@@ -6,6 +6,11 @@ article {
     color: $silver;
     background-color: $light-blue;
     border-radius: 7px;
+
+    p {
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
 }
 
 time {

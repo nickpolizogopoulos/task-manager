@@ -17,16 +17,13 @@ import { Title } from '@angular/platform-browser';
     NewTaskComponent,
   ],
   template: `
-  
-    <!-- @if (isAddingTask()) {
-      <app-new-task (close)="onCloseAddTask()" [user]="user()" />
-    } -->
+
     <section class="tasks">
         <header>
             <h2>{{ user()?.name }}'s Tasks</h2>
             <menu>
                 <button class="close" (click)="onUserClose()">Close</button>
-                <button (click)="onAddNewTask()">Add Task</button>
+                <button routerLink="new-task">Add Task</button>
             </menu>
         </header>
         <hr>
@@ -53,31 +50,12 @@ export class TasksComponent  {
 
   private title = inject(Title);
 
-  // user = input.required<User>();
-
-  
-  // closeTasks = output<void>();
-  // isAddingTask = signal<boolean>(false);
-  
   get selectedUserTasks() {
     return this.tasksService.getUserTasks( this.user()!.id );
   }
   
-  onAddNewTask():void {
-    // this.isAddingTask.set(true);
+  
 
-    // this.router.navigate(['/new-task']);
-  }
-  
-  @HostListener('document:keydown.escape', ['$event']) 
-  onCloseAddTask():void {
-    // this.isAddingTask.set(false);
-  }
-  
-  onUserClose():void {
-    this.router.navigate(['/']);
-    // this.title.setTitle('Easy Task Manager');
-  }
   
 
 
@@ -88,12 +66,12 @@ export class TasksComponent  {
   private activatedRoute = inject(ActivatedRoute);
   
   user = signal<User | undefined>(undefined);
-  // userId = input.required<string>();
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
+    
     const subscription = this.activatedRoute.paramMap.subscribe({
       next: paramMap => {
-
+        
         const user = this.usersService.users
           .find( user => user.id === paramMap.get('userId'));
         
@@ -108,9 +86,11 @@ export class TasksComponent  {
       }
     });
     this.destroyRef.onDestroy( () => subscription.unsubscribe() );
-
-
   }
 
+  @HostListener('document:keydown.escape', ['$event'])
+  onUserClose():void {
+    this.router.navigate(['/']);
+  }
 
 }

@@ -3,14 +3,13 @@
 .tasks {
     padding: 1rem;
     border-radius: 7px;
-    max-height: 60vh;
     overflow: auto;
     background-color: $deep-blue;
     border: 1px solid $blue-grey;
 
-    @media screen and (max-width: 767px) {
-        max-height: 430px;
-    }
+    // @media screen and (max-width: 767px) {
+    //     max-height: 430px;
+    // }
 
     header {
         display: flex;

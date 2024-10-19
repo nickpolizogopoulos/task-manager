@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { HeaderComponent } from './common-components/header.component';
@@ -14,20 +14,26 @@ import { UsersComponent } from './users/users.component';
     UsersComponent,
     FooterComponent
   ],
+  encapsulation: ViewEncapsulation.None,
+  host: {
+    'class': 'ti-kanw-Thee-mou'
+  },
   template: `
   
-    <header appHeader></header>
-    <main>
-
-      <aside>
-        <app-users />
-      </aside>
+    <section>
+      <header appHeader></header>
+      <main>
         
-      <section>
-        <router-outlet />
-      </section>
-
-    </main>
+        <aside>
+          <app-users />
+        </aside>
+        
+        <section>
+          <router-outlet />
+        </section>
+        
+      </main>
+    </section>
     <footer appFooter></footer>
   
   `,

@@ -1,10 +1,10 @@
 <div class="backdrop"></div>
 <dialog open>
-    <h2>New task for {{ user().name }}</h2>
+    <h2>New task for {{ user()!.name }}</h2>
     <hr>
     <form (ngSubmit)="onSubmit()">
         <label for="title">Title</label>
-        <input [(ngModel)]="title" type="text" id="title" name="title" />
+        <input [(ngModel)]="taskTitle" type="text" id="title" name="title" />
 
         <label for="summary">Summary</label>
         <textarea [(ngModel)]="summary" id="summary" rows="5" name="summary"></textarea>
