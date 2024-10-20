@@ -1,12 +1,12 @@
-import { Component, computed, DestroyRef, HostListener, inject, input, output, signal } from '@angular/core';
-import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { type User } from '../utilities/users';
 import { UsersService } from '../users/users.service';
 import { TaskComponent } from "./task/task.component";
 import { NewTaskComponent } from "./new-task/new-task.component";
 import { TasksService } from './tasks.service';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-tasks',
@@ -16,6 +16,9 @@ import { Title } from '@angular/platform-browser';
     TaskComponent,
     NewTaskComponent,
   ],
+  host: {
+    '(document:keydown.escape)': 'onUserClose()'
+  },
   template: `
 
     <section class="tasks">
@@ -31,11 +34,12 @@ import { Title } from '@angular/platform-browser';
             @for (task of selectedUserTasks; track task.id) {
                 <li>
                     <app-task [task]="task" />
-                    <router-outlet></router-outlet>
                 </li>
             }
             @empty {
-                <p class="empty">{{user()?.name}}'s list is empty.</p>
+                <p class="empty">
+                  {{user()?.name}}'s list is empty.
+                </p>
             }
         </ul>
     </section>
@@ -43,27 +47,19 @@ import { Title } from '@angular/platform-browser';
   `,
   styleUrl: './tasks.component.scss'
 })
-export class TasksComponent  {
+export class TasksComponent implements OnInit  {
   
-  private tasksService = inject(TasksService);
   private router = inject(Router);
-
+  private activatedRoute = inject(ActivatedRoute);
+  private destroyRef = inject(DestroyRef);
   private title = inject(Title);
+
+  private usersService = inject(UsersService);
+  private tasksService = inject(TasksService);
 
   get selectedUserTasks() {
     return this.tasksService.getUserTasks( this.user()!.id );
   }
-  
-  
-
-  
-
-
-  //* ======================================================================
-
-  private usersService = inject(UsersService);
-  private destroyRef = inject(DestroyRef);
-  private activatedRoute = inject(ActivatedRoute);
   
   user = signal<User | undefined>(undefined);
 
@@ -85,11 +81,11 @@ export class TasksComponent  {
     
       }
     });
+    
     this.destroyRef.onDestroy( () => subscription.unsubscribe() );
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
-  onUserClose():void {
+  onUserClose(): void {
     this.router.navigate(['/']);
   }
 

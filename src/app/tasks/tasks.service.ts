@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+
 import { dummy_tasks, type NewTaskData, type Task } from '../utilities/tasks';
 
 @Injectable({
@@ -6,8 +7,10 @@ import { dummy_tasks, type NewTaskData, type Task } from '../utilities/tasks';
 })
 export class TasksService {
 
+  private localStorageItem: string = 'nick-polizogopoulos-easy-task-manager-web-application';
+
   constructor() {
-    const tasks = localStorage.getItem('tasks');
+    const tasks = localStorage.getItem(this.localStorageItem);
 
     if (tasks)
       this.tasks.set(JSON.parse(tasks));
@@ -15,33 +18,42 @@ export class TasksService {
 
   private tasks = signal<Task[]>(dummy_tasks);
 
-  private saveTasks() {
+  private saveTasks(): void {
     const tasks = JSON.stringify(this.tasks());
 
-    localStorage.setItem('tasks', tasks);
+    localStorage.setItem(this.localStorageItem, tasks);
   }
 
   getUserTasks( userId: string ): Task[] {
-    return this.tasks().filter( task => task.userId === userId );
+    return this.tasks().filter(
+      task => task.userId === userId
+    );
   }
 
   addTask( task: NewTaskData, userId: string ): void {
-    this.tasks.update( tasks => [
-      {
-        //* not the best way to generate random IDs but works for now.
-        id: new Date().getTime().toString(),
-        userId: userId,
-        title: task.title,
-        summary: task.summary,
-        dueDate: task.date
-      },
-      ...tasks
-    ]);
+    this.tasks.update( 
+      tasks => [
+        {
+          id: crypto.randomUUID(),
+          userId: userId,
+          title: task.title,
+          summary: task.summary,
+          dueDate: task.date
+        },
+        ...tasks
+      ]
+    );
+
     this.saveTasks();
   }
 
-  removeTask( id:string ) {
-    this.tasks.update( tasks => tasks.filter(task => task.id !== id) );
+  removeTask( id: string ): void {
+    this.tasks.update( 
+      tasks => tasks.filter(
+        task => task.id !== id
+      )
+    );
+
     this.saveTasks();
   }
   

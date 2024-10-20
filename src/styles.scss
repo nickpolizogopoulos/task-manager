@@ -32,7 +32,13 @@ button {
 
 p {
     text-wrap: wrap;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
+
+a {
+    text-decoration: none;
+} 
 
 hr {
     border: none;

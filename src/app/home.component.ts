@@ -12,14 +12,10 @@ import { Title } from "@angular/platform-browser";
             Any edits will be saved in your browser's local storage,
             allowing you to revisit them each time you return to this application!
         </p>
-        <p>
-            Thank you!
-        </p>
+        <p>Thank you!</p>
             
     `,
     styles: `
-
-        
     
         hr {
             margin: 25px 0;
@@ -35,7 +31,7 @@ export class HomeComponent implements OnInit {
 
     private title = inject(Title);
   
-    ngOnInit():void {
+    ngOnInit(): void {
       this.title.setTitle('Easy Task Manager');
     }
   

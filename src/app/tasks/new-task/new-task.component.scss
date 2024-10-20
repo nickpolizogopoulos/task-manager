@@ -8,19 +8,20 @@ $error: rgb(222, 81, 81);
     left: 0;
     width: 100%;
     height: 100vh;
-    backdrop-filter: blur(7px);
+    backdrop-filter: blur(5px);
 }
 
 dialog {
     width: 90%;
     max-width: 30rem;
     background-color: $deep-blue;
-    border-radius: 6px;
+    border-radius: 7px;
     overflow: hidden;
     padding: 1rem;
     top: 8rem;
     margin: auto;
     border: 2px solid $blue-grey;
+    color: $silver;
 
     @media (min-width: 768px) {
         padding: 2rem;
@@ -35,10 +36,6 @@ hr {
     color: $error;
 }
 
-h2 {
-    color: $silver;
-}
-
 label {
     font-size: 1rem;
     margin-bottom: 3px;
@@ -47,7 +44,7 @@ label {
         content: "*";
         margin-left: 2px;
         font-size: 1.4rem;
-        font-weight: 100;
+        font-weight: 200;
         color: $error;
     }
 }
@@ -58,7 +55,7 @@ textarea {
     color: $deep-blue;
     width: 100%;
     font: inherit;
-    padding: 0.15rem 0.6rem;
+    padding: 0.21rem 0.7rem;
     border-radius: 4px;
     border: none;
     background-color: $grey;
@@ -72,7 +69,7 @@ textarea {
     margin: 1rem 0 0;
     display: flex;
     justify-content: flex-end;
-    gap: 0.25rem;
+    gap: .8rem;
 }
 
 button {
@@ -82,7 +79,6 @@ button {
     border-radius: 4px;
     background-color: transparent;
     border: 2px solid transparent;
-    margin-left: 10px;
 
     &[type="button"] {
         color: $silver;
@@ -106,5 +102,4 @@ button {
             border: 2px solid $grey;
         }
     }
-
 }

@@ -30,7 +30,7 @@ export class TaskComponent {
 
   task = input.required<Task>();
 
-  onComplete():void {
+  onComplete(): void {
     this.tasksService.removeTask( this.task().id );
   }
   

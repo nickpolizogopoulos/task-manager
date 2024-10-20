@@ -1,23 +1,18 @@
-import { provideZoneChangeDetection } from '@angular/core';
+import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideRouter } from '@angular/router';
 
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
-// import { provideHttpClient } from '@angular/common/http';
 
 bootstrapApplication(
   AppComponent,
   {
     providers:
     [
-      provideZoneChangeDetection({ eventCoalescing: true }),
-      provideRouter(
-        routes,
-        withComponentInputBinding()
-      ),
-      // provideHttpClient()
+      provideExperimentalZonelessChangeDetection(),
+      provideRouter(routes)
     ]
   }
 )
-.catch( error => console.error(error));
+.catch( error => console.error(error) );

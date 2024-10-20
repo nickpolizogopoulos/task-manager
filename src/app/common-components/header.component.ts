@@ -14,9 +14,13 @@ import { Component, ViewEncapsulation } from '@angular/core';
     <p>The no.1 Enterprise-Level Task Management System!</p>
     
   `,
+  encapsulation: ViewEncapsulation.None,
+  host: {
+    'class': 'header'
+  },
   styles: `
   
-    :host {
+    .header {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -26,10 +30,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
       margin: 1px auto 1rem auto;
       text-align: center;
       background: linear-gradient(
-            to top,
-            #282D40,
-            #0A162C
-        );
+        to top,
+        #282D40,
+        #0A162C
+      );
       padding: 1rem;
       border-radius: 0 0 12px 12px ;
       box-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
@@ -38,13 +42,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
       user-select: none;
     }
 
-    @media (min-width: 768px) {
-        header {
-            padding: 2rem;
-        }
+    @media (min-width: 890px) {
 
-        img {
-            width: 4.5rem;
+        .header {
+            padding: 2rem;
         }
 
         h1 {
@@ -52,6 +53,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
             margin: 0;
             padding: 0;
         }
+        
     }
 
   `

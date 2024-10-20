@@ -8,7 +8,7 @@
 
         <label for="summary">Summary</label>
         <textarea [(ngModel)]="summary" id="summary" rows="5" name="summary"></textarea>
-
+        
         <label for="due-date">Due Date</label>
         <input [(ngModel)]="date" type="date" id="due-date" name="due-date" />
         @if (formErrorMessage()) {

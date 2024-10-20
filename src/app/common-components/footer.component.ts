@@ -3,12 +3,11 @@ import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
   selector: 'footer[appFooter]',
   standalone: true,
-  imports: [],
   template: `
   
     <p>
       An 
-      <a href="https://angular.dev/" target="_blank">Angular</a>
+      <a href="https://angular.dev/" target="_blank" class="angular">Angular</a>
       Web Application made by 
       <a href="https://nick-polizogopoulos.web.app/" target="_blank">
         Nick Polizogopoulos
@@ -24,10 +23,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
 
     .footer {
         margin: 0 auto;
-        // position: fixed;
-        // bottom: 0;
-        // left: 0;
-        // right: 0;
         width: 90%;
         max-width: 50rem;
         text-align: center;
@@ -44,9 +39,20 @@ import { Component, ViewEncapsulation } from '@angular/core';
 
         a {
             color: inherit;
+
             &:hover {
-                color: white;
+              color: white;
+              text-decoration: underline;
+              text-decoration-thickness: 1.5px;
+              text-underline-offset: 6px;
             }
+
+            &.angular {
+              &:hover {
+                color: rgb(211, 16, 156);
+              }
+            }
+            
         }
     }
     

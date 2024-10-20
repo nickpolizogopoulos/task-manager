@@ -1,7 +1,7 @@
-import { Component, computed, inject, input, output, signal, ViewEncapsulation } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { type User } from '../utilities/users';
-import { RouterModule } from '@angular/router';
 import { UsersService } from './users.service';
 
 @Component({
@@ -28,24 +28,8 @@ import { UsersService } from './users.service';
 })
 export class UsersComponent {
 
-  // user = input.required<User>();
-
   private usersService = inject(UsersService);
-  
+
   users = signal<User[]>(this.usersService.users);
-
-
-  // isSelected = input.required<boolean>();
-
-  // select = output<string>();
-
-
-  // avatarPath = computed<string>(
-  //   () => 'users/' + this.user().avatar!
-  // );
-
-  // avatarAlt = computed<string>(
-  //   () => 'users/' + this.user().name + ' avatar'
-  // );
 
 }

@@ -1,22 +1,18 @@
 @use '../utilities/colour-palette' as *;
 
+$transition: all .14s linear;
+
 .user-box {
-    transition: all .2s ease-in-out;
+    transition: $transition;
     border-radius: 7px;
     box-shadow: 0 1px 7px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    border: 1px solid $blue-grey;
-    
-    a {
-        text-decoration: none;
-    }   
+    border: 1px solid $blue-grey;  
     
     &:hover {
         border: 1px solid $grey;
     }
 }
-
-
 
 .user {
     display: flex;
@@ -30,7 +26,7 @@
     width: 100%;
     min-width: 10rem;
     text-align: left;
-    transition: all .1s ease-in-out;
+    transition: $transition;
     user-select: none;
 
     &:hover, 
@@ -54,19 +50,16 @@
 
 ul {
     display: flex;
-    gap: 0.5rem;
-    min-width: 220px;
-    width: 100%;
     flex-direction: column;
+    gap: 0.5rem;
 }
 
 @media screen and (max-width: 890px) {
     .user {
         min-height: 55px;
     }
-
+    
     ul {
         flex-direction: row;
-        overflow: scroll;
     }
 }

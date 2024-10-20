@@ -1,11 +1,11 @@
-import { Component, computed, DestroyRef, HostListener, inject, input, OnInit, output, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import { TasksService } from '../tasks.service';
 import { User } from '../../utilities/users';
-import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../users/users.service';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-new-task',
@@ -13,25 +13,25 @@ import { Title } from '@angular/platform-browser';
   imports: [
     FormsModule
   ],
+  host: {
+    '(document:keydown.escape)': 'onCloseAddTaskPanel()'
+  },
   templateUrl: './new-task.component.html',
   styleUrl: './new-task.component.scss'
 })
-export class NewTaskComponent implements OnInit{
+export class NewTaskComponent implements OnInit {
 
   private title = inject(Title);
-  private tasksService = inject(TasksService);
-  private usersService = inject(UsersService);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   private destroyRef = inject(DestroyRef);
-  private backToTasks = computed( () =>
-    this.router.navigate(['/users/' + this.user()!.id])
-  );
+
+  private tasksService = inject(TasksService);
+  private usersService = inject(UsersService);
   
   taskTitle = signal<string>('');
   summary = signal<string>('');
   date = signal<string>('');
-
   formErrorMessage = signal<string | null>(null);
 
   user = signal<User | undefined>(undefined);
@@ -57,11 +57,15 @@ export class NewTaskComponent implements OnInit{
     this.destroyRef.onDestroy( () => subscription.unsubscribe() );
   }
 
-  onSubmit() {
+  private backToTasks(): void {
+    this.router.navigate(['/users/' + this.user()!.id]);
+  }
 
-    const title = this.taskTitle().trim() === '';
-    const summary = this.summary().trim() === '';
-    const date = this.date() === '';
+  onSubmit(): void {
+
+    const title: boolean = this.taskTitle().trim() === '';
+    const summary: boolean = this.summary().trim() === '';
+    const date: boolean = this.date() === '';
     
     if (title || summary || date ) {
       this.formErrorMessage.set('Please, fill all the required fields!');
@@ -82,7 +86,6 @@ export class NewTaskComponent implements OnInit{
     this.backToTasks();
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
   onCloseAddTaskPanel(): void {
     
     if (this.taskTitle() || this.summary() || this.date()) {
@@ -94,6 +97,4 @@ export class NewTaskComponent implements OnInit{
 
     this.backToTasks();
   }
-
-
 }

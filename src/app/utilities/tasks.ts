@@ -15,7 +15,7 @@ export interface NewTaskData {
 }
 
 
-export const dummy_tasks:Task[] = 
+export const dummy_tasks: Task[] = 
 [
     {
         id: 't1',
