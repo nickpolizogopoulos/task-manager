@@ -5,14 +5,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
   standalone: true,
   template: `
   
-    <p>
-      An 
-      <a href="https://angular.dev/" target="_blank" class="angular">Angular</a>
-      Web Application made by 
-      <a href="https://nick-polizogopoulos.web.app/" target="_blank">
-        Nick Polizogopoulos
-      </a>
-    </p>
+    An 
+    <a href="https://angular.dev/" target="_blank" class="angular">Angular</a>
+    Web Application made by 
+    <a href="https://nick-polizogopoulos.web.app/" target="_blank">
+      Nick Polizogopoulos
+    </a>
   
   `,
   encapsulation: ViewEncapsulation.None,

@@ -1,18 +1,30 @@
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+  computed
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink
+} from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-import { type User } from '../utilities/users';
 import { UsersService } from '../users/users.service';
+import { TasksService } from './tasks.service';
+import { type User } from '../utilities/users';
+import { type Task } from '../utilities/tasks';
 import { TaskComponent } from "./task/task.component";
 import { NewTaskComponent } from "./new-task/new-task.component";
-import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
   imports: [
-    RouterModule,
+    RouterLink,
     TaskComponent,
     NewTaskComponent,
   ],
@@ -31,14 +43,14 @@ import { TasksService } from './tasks.service';
         </header>
         <hr>
         <ul>
-            @for (task of selectedUserTasks; track task.id) {
+            @for (task of userTasks(); track task.id) {
                 <li>
                     <app-task [task]="task" />
                 </li>
             }
             @empty {
                 <p class="empty">
-                  {{user()?.name}}'s list is empty.
+                  {{ user()?.name }}'s list is empty.
                 </p>
             }
         </ul>
@@ -57,9 +69,11 @@ export class TasksComponent implements OnInit  {
   private usersService = inject(UsersService);
   private tasksService = inject(TasksService);
 
-  get selectedUserTasks() {
-    return this.tasksService.getUserTasks( this.user()!.id );
-  }
+  userTasks = computed<Task[]>( () =>
+    this.tasksService.getTasks().filter(
+      task => task.userId === this.user()?.id
+    )
+  );
   
   user = signal<User | undefined>(undefined);
 
@@ -77,7 +91,7 @@ export class TasksComponent implements OnInit  {
         }
           
         else
-          this.router.navigate(['/']);
+          this.router.navigate(['/404']);
     
       }
     });

@@ -82,8 +82,8 @@ button {
 
     &[type="button"] {
         color: $silver;
-        
-        &:hover, &:active {
+        &:hover,
+        &:active {
             color: $silver;
             border: 2px solid $grey;
         }
@@ -91,11 +91,9 @@ button {
 
     &[type="submit"] {
         background-color: $grey;
-        transition: all 0.3s ease;
-        border: 2px solid $grey;
         color: $deep-blue;
-        
-        &:hover, &:active {
+        &:hover,
+        &:active {
             box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
             background-color: transparent;
             color: $silver;

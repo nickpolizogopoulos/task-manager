@@ -1,17 +1,33 @@
-import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { 
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink
+} from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 
-import { TasksService } from '../tasks.service';
-import { User } from '../../utilities/users';
 import { UsersService } from '../../users/users.service';
+import { TasksService } from '../tasks.service';
+import { type User } from '../../utilities/users';
 
 @Component({
   selector: 'app-new-task',
   standalone: true,
   imports: [
-    FormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   host: {
     '(document:keydown.escape)': 'onCloseAddTaskPanel()'
@@ -21,17 +37,15 @@ import { UsersService } from '../../users/users.service';
 })
 export class NewTaskComponent implements OnInit {
 
-  private title = inject(Title);
+  private pageTitle = inject(Title);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   private destroyRef = inject(DestroyRef);
+  private fb = inject(FormBuilder);
 
   private tasksService = inject(TasksService);
   private usersService = inject(UsersService);
   
-  taskTitle = signal<string>('');
-  summary = signal<string>('');
-  date = signal<string>('');
   formErrorMessage = signal<string | null>(null);
 
   user = signal<User | undefined>(undefined);
@@ -46,7 +60,7 @@ export class NewTaskComponent implements OnInit {
 
         if (user) {
           this.user.set(user);
-          this.title.setTitle(this.user()?.name + ' - New task');
+          this.pageTitle.setTitle(this.user()?.name + ' - New task');
         }
           
         else
@@ -58,38 +72,48 @@ export class NewTaskComponent implements OnInit {
   }
 
   private backToTasks(): void {
-    this.router.navigate(['/users/' + this.user()!.id]);
+    this.router.navigate(['/users', this.user()!.id]);
   }
+
+  form = this.fb.group({
+    title: ['', Validators.required],
+    summary: ['', Validators.required],
+    date: ['', Validators.required]
+  });
+
+  private title = computed<string>( () => this.form.controls.title.value ! );
+  private summary = computed<string>(() => this.form.controls.summary.value ! );
+  private date = computed<string>( () => this.form.controls.date.value ! );
 
   onSubmit(): void {
 
-    const title: boolean = this.taskTitle().trim() === '';
-    const summary: boolean = this.summary().trim() === '';
-    const date: boolean = this.date() === '';
-    
-    if (title || summary || date ) {
+    if (this.form.invalid) {
       this.formErrorMessage.set('Please, fill all the required fields!');
       return;
     }
     
-    this.formErrorMessage.set(null);
-    
     this.tasksService.addTask(
       {
-        title: this.taskTitle(),
+        title: this.title(),
         summary: this.summary(),
         date: this.date()
       },
       this.user()!.id
     );
 
-    this.backToTasks();
+    this.formErrorMessage.set(null);
+    
+    //* replace URL to true to prevent goin' back to the form after submitting the task.
+    this.router.navigate(
+      ['/users', this.user()!.id],
+      { replaceUrl: true }
+    );
   }
 
   onCloseAddTaskPanel(): void {
-    
-    if (this.taskTitle() || this.summary() || this.date()) {
-      const confirmation = confirm('Do you really want to close the form? All your information will be lost!');
+
+    if (this.title() || this.summary() || this.date()) {
+    const confirmation = confirm('Do you really want to close the form? All your information will be lost!');
 
       if (!confirmation)
         return;

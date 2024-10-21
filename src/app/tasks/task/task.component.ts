@@ -1,8 +1,12 @@
-import { Component, inject, input } from '@angular/core';
+import { 
+  Component,
+  inject,
+  input
+} from '@angular/core';
 import { DatePipe } from '@angular/common';
 
-import { type Task } from '../../utilities/tasks';
 import { TasksService } from '../tasks.service';
+import { type Task } from '../../utilities/tasks';
 
 @Component({
   selector: 'app-task',

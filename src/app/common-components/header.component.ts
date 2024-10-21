@@ -11,7 +11,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
       <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
     </svg>
     <h1>Easy Task Manager</h1>
-    <p>The no.1 Enterprise-Level Task Management System!</p>
+    The no.1 Enterprise-Level Task Management System!
     
   `,
   encapsulation: ViewEncapsulation.None,

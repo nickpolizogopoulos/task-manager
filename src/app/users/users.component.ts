@@ -1,5 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { 
+  Component,
+  inject,
+  signal
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { type User } from '../utilities/users';
 import { UsersService } from './users.service';
@@ -8,12 +12,12 @@ import { UsersService } from './users.service';
   selector: 'app-users',
   standalone: true,
   imports: [
-    RouterModule
+    RouterLink
   ],
   template: `
   
     <ul>
-      @for (user of users(); track user.id) {
+      @for (user of allUsers(); track user.id) {
         <li class="user-box">
           <a [routerLink]="['/users', user.id]" routerLinkActive="active" class="user">
             <img [src]="['/users/' + user.avatar]" [alt]="[user.name + ' avatar']">
@@ -30,6 +34,7 @@ export class UsersComponent {
 
   private usersService = inject(UsersService);
 
-  users = signal<User[]>(this.usersService.users);
+  private users = signal<User[]>(this.usersService.users);
+  allUsers = this.users.asReadonly();
 
 }

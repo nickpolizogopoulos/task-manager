@@ -1,6 +1,14 @@
-import { Injectable, signal } from '@angular/core';
+import { 
+  Injectable,
+  Signal,
+  signal
+} from '@angular/core';
 
-import { dummy_tasks, type NewTaskData, type Task } from '../utilities/tasks';
+import {
+  dummy_tasks,
+  type NewTaskData,
+  type Task
+} from '../utilities/tasks';
 
 @Injectable({
   providedIn: 'root'
@@ -17,17 +25,12 @@ export class TasksService {
   }
 
   private tasks = signal<Task[]>(dummy_tasks);
+  getTasks: Signal<Task[]> = this.tasks.asReadonly();
 
   private saveTasks(): void {
     const tasks = JSON.stringify(this.tasks());
 
     localStorage.setItem(this.localStorageItem, tasks);
-  }
-
-  getUserTasks( userId: string ): Task[] {
-    return this.tasks().filter(
-      task => task.userId === userId
-    );
   }
 
   addTask( task: NewTaskData, userId: string ): void {

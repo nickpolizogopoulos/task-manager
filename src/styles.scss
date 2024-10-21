@@ -5,19 +5,16 @@
     margin: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-    font-style: normal;
 }
 
-html {
+html,
+body {
     height: 100%;
 }
 
 body {
     background: radial-gradient(circle at top left, $deep-blue, $black);
     color: $silver;
-    margin: 0;
-    padding: 0;
-    height: 100%;
 }
 
 @for $i from 1 through 6 {

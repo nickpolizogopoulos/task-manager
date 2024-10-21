@@ -2,20 +2,20 @@
 <dialog open>
     <h2>New task for {{ user()!.name }}</h2>
     <hr>
-    <form (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <label for="title">Title</label>
-        <input [(ngModel)]="taskTitle" type="text" id="title" name="title" />
+        <input type="text" id="title" name="title" formControlName="title" />
 
         <label for="summary">Summary</label>
-        <textarea [(ngModel)]="summary" id="summary" rows="5" name="summary"></textarea>
+        <textarea id="summary" rows="5" name="summary" formControlName="summary"></textarea>
         
         <label for="due-date">Due Date</label>
-        <input [(ngModel)]="date" type="date" id="due-date" name="due-date" />
-        @if (formErrorMessage()) {
+        <input type="date" id="due-date" name="due-date" formControlName="date"/>
+        @if (form.invalid) {
             <div class="form-error-message-box">{{ formErrorMessage() }}</div>
         }
         <div class="actions">
-            <button (click)="onCloseAddTaskPanel()" type="button">Cancel</button>
+            <button routerLink="../" type="button">Cancel</button>
             <button type="submit">Create</button>
         </div>
     </form>
