@@ -19,6 +19,9 @@ import { Component, ViewEncapsulation } from '@angular/core';
   },
   styles: `
 
+    @use '../../app/utilities/colour-palette' as *;
+    @use '../utilities/common.scss';
+
     .footer {
         margin: 0 auto;
         width: 90%;
@@ -36,21 +39,23 @@ import { Component, ViewEncapsulation } from '@angular/core';
         user-select: none;
 
         a {
-            color: inherit;
+          @extend %text-decoration;
+          color: inherit;
+          &:hover {
+            text-decoration: none;
+          }
+        }
 
-            &:hover {
-              color: white;
-              text-decoration: underline;
-              text-decoration-thickness: 1.5px;
-              text-underline-offset: 6px;
-            }
-
-            &.angular {
-              &:hover {
-                color: rgb(211, 16, 156);
-              }
-            }
-            
+        a:first-of-type {
+          &:hover {
+            @extend %angular;
+          }
+        }
+        
+        a:last-of-type {
+          &:hover {
+            color: $grey;
+          }
         }
     }
     

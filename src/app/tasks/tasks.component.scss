@@ -1,9 +1,5 @@
 @use '../../app/utilities/colour-palette' as *;
-
-%flex-gap {
-    display: flex;
-    gap: 1rem;
-}
+@use '../../app/utilities/common';
 
 .tasks {
     padding: 1rem;
@@ -13,19 +9,58 @@
     border: 1px solid $blue-grey;
 
     header {
-        @extend %flex-gap;
+        @extend %flex-gap-row;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 1rem;
-        padding: 0;
+
+        @media screen and (max-width: 570px) {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
     }
-    
+
+    hr {
+        margin: 1rem auto;
+    }
+
+    span {
+        font-size: 15px;
+        font-family: monospace;
+    }
+
+    a {
+        color: $silver;
+        cursor: pointer;
+        user-select: none;
+
+        &:hover {
+            color: $grey;
+            @extend %text-decoration;
+        }
+    }
+
+    section {
+        display: flex;
+        align-items: center;
+
+        svg {
+            margin-left: .4rem;
+        }
+    }
+
+    section,
+    a {
+        font-size: .9rem;
+    }
+
     menu {
+        @extend %flex-gap-row;
         text-align: end;
     }   
 }
 
-.empty {
+.list-empty {
     font-size: 14px;
     font-style: italic;
 }
@@ -46,7 +81,6 @@ button {
 }
 
 .close {
-    margin: 5px;
     color: $silver;
     background-color: transparent;
     border: 2px solid transparent;
@@ -56,7 +90,8 @@ button {
 }
   
 ul {
-    @extend %flex-gap;
+    display: flex;
+    gap: 1rem;
     margin-top: 1rem;
     list-style: none;
     flex-direction: column;
@@ -68,4 +103,13 @@ ul {
     h2 {
         font-size: 1.25rem;
     }
+}
+
+.short-arrow {
+    margin-right: 3px;
+    transition: all .1s ease-in-out;
+}
+
+.short-arrow-rotate {
+    transform: rotate(-180deg);
 }

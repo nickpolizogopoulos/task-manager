@@ -4,3 +4,10 @@ $light-blue: #282D40;
 $blue-grey: #4A495A;
 $grey: #83828B;
 $silver: #bcbcbc;
+%angular {
+    background: linear-gradient(to right, #E91067 0%, #B640FA 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration-color: linear-gradient(to right, #E91067 0%, #B640FA 100%);
+}

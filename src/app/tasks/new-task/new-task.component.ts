@@ -3,6 +3,7 @@ import {
   computed,
   DestroyRef,
   inject,
+  input,
   OnInit,
   signal
 } from '@angular/core';
@@ -20,7 +21,7 @@ import {
 
 import { UsersService } from '../../users/users.service';
 import { TasksService } from '../tasks.service';
-import { type User } from '../../utilities/users';
+import { type User } from '../../utilities/tools/users';
 
 @Component({
   selector: 'app-new-task',
@@ -37,10 +38,10 @@ import { type User } from '../../utilities/users';
 })
 export class NewTaskComponent implements OnInit {
 
-  private pageTitle = inject(Title);
+  // private pageTitle = inject(Title);
   private router = inject(Router);
-  private activatedRoute = inject(ActivatedRoute);
-  private destroyRef = inject(DestroyRef);
+  // private activatedRoute = inject(ActivatedRoute);
+  // private destroyRef = inject(DestroyRef);
   private fb = inject(FormBuilder);
 
   private tasksService = inject(TasksService);
@@ -48,27 +49,30 @@ export class NewTaskComponent implements OnInit {
   
   formErrorMessage = signal<string | null>(null);
 
-  user = signal<User | undefined>(undefined);
+  // user = signal<User | undefined>(undefined);
+
+  user = input.required<User>();
+  pageTitle = input.required<string>();
 
   ngOnInit(): void {
 
-    const subscription = this.activatedRoute.paramMap.subscribe({
-      next: paramMap => {
+    // const subscription = this.activatedRoute.paramMap.subscribe({
+    //   next: paramMap => {
         
-        const user = this.usersService.users
-          .find( user => user.id === paramMap.get('userId'));
+    //     const user = this.usersService.users
+    //       .find( user => user.id === paramMap.get('userId'));
 
-        if (user) {
-          this.user.set(user);
-          this.pageTitle.setTitle(this.user()?.name + ' - New task');
-        }
+    //     if (user) {
+    //       this.user.set(user);
+    //       this.pageTitle.setTitle(this.user()?.name + ' - New task');
+    //     }
           
-        else
-          this.router.navigate(['/']);
-      }
-    });
+    //     else
+    //       this.router.navigate(['/']);
+    //   }
+    // });
     
-    this.destroyRef.onDestroy( () => subscription.unsubscribe() );
+    // this.destroyRef.onDestroy( () => subscription.unsubscribe() );
   }
 
   private backToTasks(): void {

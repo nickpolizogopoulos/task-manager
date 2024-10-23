@@ -1,4 +1,5 @@
-@use '../../../app/utilities/colour-palette' as *;
+@use '../../utilities/colour-palette.scss' as *;
+@use '../../utilities/common.scss';
 
 article  {
     padding: 1rem;
@@ -8,32 +9,43 @@ article  {
 
 time {
     color: $grey;
-    font-size: 14px;
+    font-size: 13px;
     font-style: italic;
-    text-decoration: underline;
-    text-decoration-thickness: 1.5px;
-    text-underline-offset: 4px;
+    
+    @extend %text-decoration;
+
+    span {
+        font-family: monospace;
+    }
 }
 
 .summary {
-    margin: 15px 0 25px 0;
+    margin: 15px 0 28px 0;
 }
 
 .actions {
-    text-align: right;
+    @extend %flex-gap-row;
+
+    button:first-of-type {
+        background-color: transparent;
+        border: 2px solid transparent;
+        box-shadow: none;
+    }
     
     button {
-        cursor: pointer;
-        background-color: $deep-blue;
         color: $silver;
+        cursor: pointer;
         border-radius: 4px;
         padding: 0.3rem 1rem;
+        
+        background-color: $deep-blue;
         box-shadow: 0px 0px 11px rgba(255, 255, 255, 0.4);
         border: 2px solid $deep-blue;
-        &:hover, &:active {
+
+        &:hover,
+        &:active {
             background-color: transparent;
             border: 2px solid $grey;
-            color: $silver;
             box-shadow: none;
         }
     }

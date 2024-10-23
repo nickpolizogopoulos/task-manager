@@ -27,7 +27,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
       gap: 1rem;
       width: 90%;
       max-width: 50rem;
-      margin: 1px auto 1rem auto;
+      margin: 2px auto 0 auto;
       text-align: center;
       background: linear-gradient(
         to top,

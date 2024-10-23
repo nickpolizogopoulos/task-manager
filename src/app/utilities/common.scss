@@ -1,0 +1,12 @@
+%flex-gap-row {
+    display: flex;
+    flex-direction: row;
+    gap: .7rem;
+    justify-content: end;
+}
+
+%text-decoration {
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 4.5px;
+}

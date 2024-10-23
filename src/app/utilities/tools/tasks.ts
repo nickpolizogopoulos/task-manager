@@ -1,5 +1,5 @@
 
-export interface Task {
+export type Task = {
     id: string;
     userId: string;
     title: string;
@@ -7,13 +7,16 @@ export interface Task {
     dueDate: string;
 }
 
+export type TaskListOrderOptions = 'ascending' | 'descending';
+
 //* form output
-export interface NewTaskData {
+export type NewTaskData = {
     title: string;
     summary: string;
     date: string;
 }
 
+export const taskIdSubstring: number = 3;
 
 export const dummy_tasks: Task[] = 
 [

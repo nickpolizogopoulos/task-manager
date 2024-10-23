@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { type User } from '../utilities/users';
+import { type User } from '../utilities/tools/users';
 import { UsersService } from './users.service';
 
 @Component({

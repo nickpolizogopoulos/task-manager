@@ -8,7 +8,7 @@ import {
   dummy_tasks,
   type NewTaskData,
   type Task
-} from '../utilities/tasks';
+} from '../utilities/tools/tasks';
 
 @Injectable({
   providedIn: 'root'
