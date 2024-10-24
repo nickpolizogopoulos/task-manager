@@ -1,25 +1,20 @@
 import { 
   Component,
-  computed,
-  DestroyRef,
   inject,
+  computed,
   input,
-  OnInit,
   signal
 } from '@angular/core';
 import {
-  ActivatedRoute,
   Router,
   RouterLink
 } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 import {
   FormBuilder,
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
 
-import { UsersService } from '../../users/users.service';
 import { TasksService } from '../tasks.service';
 import { type User } from '../../utilities/tools/users';
 
@@ -31,53 +26,21 @@ import { type User } from '../../utilities/tools/users';
     RouterLink
   ],
   host: {
-    '(document:keydown.escape)': 'onCloseAddTaskPanel()'
+    '(document:keydown.escape)': `router.navigate(['/users', this.user()!.id])`
   },
   templateUrl: './new-task.component.html',
   styleUrl: './new-task.component.scss'
 })
-export class NewTaskComponent implements OnInit {
+export class NewTaskComponent {
 
-  // private pageTitle = inject(Title);
   private router = inject(Router);
-  // private activatedRoute = inject(ActivatedRoute);
-  // private destroyRef = inject(DestroyRef);
   private fb = inject(FormBuilder);
 
   private tasksService = inject(TasksService);
-  private usersService = inject(UsersService);
   
   formErrorMessage = signal<string | null>(null);
-
-  // user = signal<User | undefined>(undefined);
-
   user = input.required<User>();
-  pageTitle = input.required<string>();
-
-  ngOnInit(): void {
-
-    // const subscription = this.activatedRoute.paramMap.subscribe({
-    //   next: paramMap => {
-        
-    //     const user = this.usersService.users
-    //       .find( user => user.id === paramMap.get('userId'));
-
-    //     if (user) {
-    //       this.user.set(user);
-    //       this.pageTitle.setTitle(this.user()?.name + ' - New task');
-    //     }
-          
-    //     else
-    //       this.router.navigate(['/']);
-    //   }
-    // });
-    
-    // this.destroyRef.onDestroy( () => subscription.unsubscribe() );
-  }
-
-  private backToTasks(): void {
-    this.router.navigate(['/users', this.user()!.id]);
-  }
+  submitted = signal<boolean>(false);
 
   form = this.fb.group({
     title: ['', Validators.required],
@@ -85,9 +48,9 @@ export class NewTaskComponent implements OnInit {
     date: ['', Validators.required]
   });
 
-  private title = computed<string>( () => this.form.controls.title.value ! );
-  private summary = computed<string>(() => this.form.controls.summary.value ! );
-  private date = computed<string>( () => this.form.controls.date.value ! );
+  title = computed<string>( () => this.form.controls.title.value ! );
+  summary = computed<string>(() => this.form.controls.summary.value ! );
+  date = computed<string>( () => this.form.controls.date.value ! );
 
   onSubmit(): void {
 
@@ -106,6 +69,7 @@ export class NewTaskComponent implements OnInit {
     );
 
     this.formErrorMessage.set(null);
+    this.submitted.set(true);
     
     //* replace URL to true to prevent goin' back to the form after submitting the task.
     this.router.navigate(
@@ -114,15 +78,4 @@ export class NewTaskComponent implements OnInit {
     );
   }
 
-  onCloseAddTaskPanel(): void {
-
-    if (this.title() || this.summary() || this.date()) {
-    const confirmation = confirm('Do you really want to close the form? All your information will be lost!');
-
-      if (!confirmation)
-        return;
-    }
-
-    this.backToTasks();
-  }
 }

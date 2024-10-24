@@ -52,7 +52,7 @@ import { TaskComponent } from "./task/task.component";
             <a 
               routerLink="./"
               [queryParams]="{ 'tasksorder': shorted() ? 'decending' : 'ascending' }"
-              (click)="onShortClick()"
+              (click)="onSortTasksClick()"
             >
               {{ shorted() ? 'Descending' : 'Ascending' }}
             </a>
@@ -83,7 +83,11 @@ export class TasksComponent implements OnInit  {
   private activatedRoute = inject(ActivatedRoute);
   private destroyRef = inject(DestroyRef);
 
+  user = input.required<User>();
+  shorted = signal<boolean>(false);
+
   private tasksService = inject(TasksService);
+  private order = signal<TaskListOrderOptions>( this.shorted() ? 'descending' : 'ascending' );
 
   userTasks = computed<Task[]>( () =>
     this.tasksService
@@ -96,25 +100,19 @@ export class TasksComponent implements OnInit  {
           return a.dueDate < b.dueDate ? 1 : -1
       })
   );
-  
-  user = input.required<User>();
-  
+
   ngOnInit(): void {
-    const queryParamsSubscription = this.activatedRoute.queryParams.subscribe({
+    const subscription = this.activatedRoute.queryParams.subscribe({
       next: params => this.order.set(params['tasksorder'])
     });
-    this.destroyRef.onDestroy( () => queryParamsSubscription.unsubscribe() );
+    this.destroyRef.onDestroy( () => subscription.unsubscribe() );
+  }
+
+  onSortTasksClick(): void {
+    this.shorted.update( value => !value );  
   }
 
   onUserClose(): void {
     this.router.navigate(['/']);
   }
-
-  shorted = signal<boolean>(false);
-  private order = signal<TaskListOrderOptions>( this.shorted() ? 'descending' : 'ascending' );
-
-  onShortClick(): void {
-    this.shorted.update( value => !value );  
-  }
-
 }

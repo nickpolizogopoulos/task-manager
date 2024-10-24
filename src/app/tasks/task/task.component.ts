@@ -50,10 +50,8 @@ export class TaskComponent {
     this.tasksService.removeTask( this.task().id );
   }
 
-  onEditTask( task: Task ): void {
-
-    console.log( task.id.substring(0, this.taskIdSubstring) );
-    
-  }
+  // onEditTask( task: Task ): void {
+  //   console.log( task.id.substring(0, this.taskIdSubstring) );
+  // }
   
 }

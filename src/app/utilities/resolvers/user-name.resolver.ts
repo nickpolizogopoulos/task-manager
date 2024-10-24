@@ -9,7 +9,7 @@ import { UsersService } from '../../users/users.service';
 import { type User } from '../tools/users';
 
 
-export const userNameResolver: ResolveFn<User> = (
+export const userResolver: ResolveFn<User> = (
   activatedRouteSnapshot: ActivatedRouteSnapshot,
   routerState: RouterStateSnapshot
 ) => {
