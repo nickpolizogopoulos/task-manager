@@ -15,8 +15,12 @@ import {
 
 import { TasksService } from './tasks.service';
 import { type User } from '../utilities/tools/users';
-import { TaskListOrderOptions, type Task } from '../utilities/tools/tasks';
+import { 
+  TaskListOrderOptions,
+  type Task
+} from '../utilities/tools/tasks';
 import { TaskComponent } from "./task/task.component";
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-tasks',
@@ -102,10 +106,11 @@ export class TasksComponent implements OnInit  {
   );
 
   ngOnInit(): void {
-    const subscription = this.activatedRoute.queryParams.subscribe({
-      next: params => this.order.set(params['tasksorder'])
-    });
-    this.destroyRef.onDestroy( () => subscription.unsubscribe() );
+    this.activatedRoute.queryParams
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: params => this.order.set(params['tasksorder'])
+      });
   }
 
   onSortTasksClick(): void {

@@ -7,7 +7,10 @@ import { DatePipe } from '@angular/common';
 // import { Router } from '@angular/router';
 
 import { TasksService } from '../tasks.service';
-import { taskIdSubstring, type Task } from '../../utilities/tools/tasks';
+import { 
+  taskIdSubstring,
+  type Task
+} from '../../utilities/tools/tasks';
 import { SubstringPipe } from '../../utilities/pipes/substring.pipe';
 
 @Component({
